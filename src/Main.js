@@ -1,0 +1,185 @@
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import AlbumsList from './components/AlbumsList';
+
+const Main = () => {
+
+  const musicDB = [
+    {
+      artist: 'Queen',
+      album: 'A Night at the Opera',
+      year: '1976',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'owned',
+        cd: 'owned',
+        digital: 'none',
+      }
+    },
+    {
+      artist: 'Queen',
+      album: 'Queen',
+      year: '1973',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'owned',
+        cd: 'wishlist',
+        digital: 'owned',
+      }
+    },
+    {
+      artist: 'A-ha',
+      album: 'Hunting High and Low',
+      year: '1985',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'owned',
+        cd: 'owned',
+        digital: 'owned',
+      }
+    },
+    {
+      artist: 'Guns n` Roses',
+      album: 'Use Your Illution I',
+      year: '1991',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'owned',
+        cd: 'wishlist'
+      }
+    },
+    {
+      artist: 'INXS',
+      album: 'Platinum: Greatest Hits',
+      year: '2023',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'owned',
+        cd: 'owned'
+      }
+    },
+    {
+      artist: 'Pink Floyd',
+      album: 'Animals',
+      year: '1977',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'wishlist',
+        cd: 'owned'
+      }
+    },
+    {
+      artist: 'Poison',
+      album: 'Flesh & Blood',
+      year: '1990',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      formats: {
+        vinyl: 'wishlist',
+        cd: 'owned',
+        digital: 'wishlist'
+      }
+    },
+    {
+      artist: 'Roxette',
+      album: 'Look Sharp',
+      year: '1988',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/INXS_kick.jpg/220px-INXS_kick.jpg',
+      formats: {
+        vinyl: 'owned',
+        cd: 'wishlist'
+      }
+    },
+    {
+      artist: 'Yes',
+      album: '90125',
+      year: '1976',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/INXS_kick.jpg/220px-INXS_kick.jpg',
+      formats: {
+        vinyl: 'owned'
+      }
+    },
+    {
+      artist: 'Iron Maiden',
+      album: 'Powerslave',
+      year: '1984',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/INXS_kick.jpg/220px-INXS_kick.jpg',
+      formats: {
+        digital: 'owned'
+      }
+    }
+  ];
+
+  /*
+  // Obtener vista de Vinilos (Formato: Vinyl)
+  const vinylCollection = musicDB
+    .filter(album => album.formats.some(format => format.type === 'vinyl' && format.status === 'owned'))
+    .reduce((acc, album) => {
+      if (!acc[album.artist]) {
+        acc[album.artist] = [];
+      }
+      acc[album.artist].push(album);
+      return acc;
+    }, {});
+
+  // Ordenar por fecha de lanzamiento dentro de cada grupo
+  for (const artist in vinylCollection) {
+    vinylCollection[artist].sort((a, b) => a.year - b.year);
+  }
+  */
+  const getFormattedCollection = (musicDB, format, status) => {
+    const filteredCollection = musicDB
+      .filter(album => {
+        if (format === '') {
+          return (
+            album.formats &&
+            Object.values(album.formats).some(formatStatus => formatStatus === status)
+          );
+        } else {
+          return album.formats && album.formats[format] === status;
+        }
+      })
+      .reduce((acc, album) => {
+        acc[album.artist] = acc[album.artist] || [];
+        acc[album.artist].push(album);
+        return acc;
+      }, {});
+  
+    // Ordenar por fecha de lanzamiento dentro de cada grupo
+    for (const artist in filteredCollection) {
+      filteredCollection[artist].sort((a, b) => a.year - b.year);
+    }
+  
+    return filteredCollection;
+  };
+  
+  // general lists
+  const wishlist = getFormattedCollection(musicDB, '', 'wishlist');
+  const owned = getFormattedCollection(musicDB, '', 'owned');
+
+  // collection by format
+  const vinylCollection = getFormattedCollection(musicDB, 'vinyl', 'owned');
+  const cdCollection = getFormattedCollection(musicDB, 'cd', 'owned');
+  const digitalCollection = getFormattedCollection(musicDB, 'digital', 'owned');
+  
+
+  // wishlists by format
+  const vinylWishlist = getFormattedCollection(musicDB, 'vinyl', 'wishlist');
+  const cdWishlist = getFormattedCollection(musicDB, 'cd', 'wishlist');
+  const digitalWishlist = getFormattedCollection(musicDB, 'digital', 'wishlist');
+  
+  return (
+    <View style={styles.appMain}>
+      <AlbumsList albums={getFormattedCollection(musicDB, 'vinyl', 'owned')}></AlbumsList>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  appMain: {
+    backgroundColor: '#fff',
+    flex: 1,
+    padding: 0
+  },
+});
+
+export default Main;
