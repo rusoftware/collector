@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AlbumsList from './components/AlbumsList';
 
-const Main = () => {
+const Main = ({ route }) => {
+
+  const { qFormat, qStatus } = route.params;
 
   const musicDB = [
     {
@@ -169,14 +171,14 @@ const Main = () => {
   
   return (
     <View style={styles.appMain}>
-      <AlbumsList albums={getFormattedCollection(musicDB, 'vinyl', 'owned')}></AlbumsList>
+      <AlbumsList albums={getFormattedCollection(musicDB, qFormat, qStatus)}></AlbumsList>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   appMain: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1f2124',
     flex: 1,
     padding: 0
   },
