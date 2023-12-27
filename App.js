@@ -9,6 +9,27 @@ const Stack = createStackNavigator();
 
 const App = () => {
 
+  const renderPageTitle = (format = '', status = 'owned') => {
+    if (format) {
+      switch (format) {
+        case 'vinyl':
+          formatValue = 'Vinyls'
+          break;
+        case 'cd':
+          formatValue = 'CDs'
+          break;
+        case 'digital':
+          formatValue = 'Digital Lossless'
+          break;
+      }
+
+      return `${formatValue} ${(status === 'owned') ? 'Collection' : 'Wishlist'}`
+    }
+    else {
+      return `${(status === 'owned') ? 'My Collection' : 'My Wishlist'}`
+    }
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -30,14 +51,14 @@ const App = () => {
             qStatus: 'owned'
           }}
           options={({ route, navigation }) => ({
-            title: route.params.pageTitle || 'default',
+            headerStyle: { backgroundColor: (route.params.qStatus == 'owned') ? '#171718' : '#6a6e73' },
+            title: renderPageTitle(route.params.qFormat, route.params.qStatus),
             headerRight: () => (
               <Pressable onPress={() => navigation.navigate("Main", {
-                pageTitle: `${route.params.qFormat} ${(route.params.qStatus === 'owned') ? 'wishlist' : 'owned'}`,
                 qFormat: route.params.qFormat,
                 qStatus: (route.params.qStatus === 'owned') ? 'wishlist' : 'owned'
               })}>
-                <Text style={ styles.switcher }>{ (route.params.qStatus === 'owned') ? 'wishlist' : 'owned' }</Text>
+                <Text style={ styles.switcher }>{ (route.params.qStatus === 'owned') ? 'wishlist' : 'collection' }</Text>
               </Pressable>
             )
           })}

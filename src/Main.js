@@ -11,7 +11,7 @@ const Main = ({ route }) => {
       artist: 'Queen',
       album: 'A Night at the Opera',
       year: '1976',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://m.media-amazon.com/images/I/71nxRqKGA8L._UF894,1000_QL80_.jpg',
       formats: {
         vinyl: 'owned',
         cd: 'owned',
@@ -22,7 +22,7 @@ const Main = ({ route }) => {
       artist: 'Queen',
       album: 'Queen',
       year: '1973',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/0/03/Queen_Queen.png',
       formats: {
         vinyl: 'owned',
         cd: 'wishlist',
@@ -33,7 +33,7 @@ const Main = ({ route }) => {
       artist: 'A-ha',
       album: 'Hunting High and Low',
       year: '1985',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0CChHXzPUAS2NM6HVftxfG9D1KYF9OPTtqRZMneNfFg&s',
       formats: {
         vinyl: 'owned',
         cd: 'owned',
@@ -44,7 +44,7 @@ const Main = ({ route }) => {
       artist: 'Guns n` Roses',
       album: 'Use Your Illution I',
       year: '1991',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-hTU0jAjxqs_p2qRkEOEeueesr2UWDv6Gff_UgAUHJjj0JNce-LR8X_hzePe05jnY1H0&usqp=CAU',
       formats: {
         vinyl: 'owned',
         cd: 'wishlist'
@@ -54,7 +54,7 @@ const Main = ({ route }) => {
       artist: 'INXS',
       album: 'Platinum: Greatest Hits',
       year: '2023',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt3WNS1Ok3vu_QBXTBdYkdeTCluU_fQoMvqvcAeMvSDw&s',
       formats: {
         vinyl: 'owned',
         cd: 'owned'
@@ -64,7 +64,7 @@ const Main = ({ route }) => {
       artist: 'Pink Floyd',
       album: 'Animals',
       year: '1977',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmw1YFFHXlXCf3cnavNrDOAFjCIiAJhrc22zWhcrsB7g&s',
       formats: {
         vinyl: 'wishlist',
         cd: 'owned'
@@ -74,7 +74,7 @@ const Main = ({ route }) => {
       artist: 'Poison',
       album: 'Flesh & Blood',
       year: '1990',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/FloydFC-Cover01.jpg/220px-FloydFC-Cover01.jpg',
+      cover: 'https://i.ytimg.com/vi/qsqy-JITfio/maxresdefault.jpg',
       formats: {
         vinyl: 'wishlist',
         cd: 'owned',
@@ -85,7 +85,7 @@ const Main = ({ route }) => {
       artist: 'Roxette',
       album: 'Look Sharp',
       year: '1988',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/INXS_kick.jpg/220px-INXS_kick.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/c/c8/LookSharp.jpg',
       formats: {
         vinyl: 'owned',
         cd: 'wishlist'
@@ -95,7 +95,7 @@ const Main = ({ route }) => {
       artist: 'Yes',
       album: '90125',
       year: '1976',
-      cover: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/INXS_kick.jpg/220px-INXS_kick.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/90125_album_cover.svg/640px-90125_album_cover.svg.png',
       formats: {
         vinyl: 'owned'
       }
@@ -171,7 +171,10 @@ const Main = ({ route }) => {
   
   return (
     <View style={styles.appMain}>
-      <AlbumsList albums={getFormattedCollection(musicDB, qFormat, qStatus)}></AlbumsList>
+      <AlbumsList
+        albums={getFormattedCollection(musicDB, qFormat, qStatus)}
+        format={qFormat}
+        status={qStatus} />
     </View>
   );
 }

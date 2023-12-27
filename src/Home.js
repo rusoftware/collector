@@ -4,35 +4,31 @@ const Home = ( {navigation} ) => {
   return (
     <View style={styles.contenedor}>
       <Pressable style={ styles.button } onPress={() => navigation.navigate("Main")}>
-        <Text style={ styles.buttonText }>main default</Text>
+        <Text style={ styles.buttonText }>My Collection</Text>
       </Pressable>
       <Pressable style={ styles.button } onPress={() => navigation.navigate("Main", {
-        pageTitle: 'Vinyls Owned',
         qFormat: 'vinyl',
         qStatus: 'owned'
       })}>
         <Text style={ styles.buttonText }>Vinyls Collection</Text>
       </Pressable>
       <Pressable style={ styles.button } onPress={() => navigation.navigate("Main", {
-        pageTitle: 'CDs Owned',
         qFormat: 'cd',
         qStatus: 'owned'
       })}>
         <Text style={ styles.buttonText }>CDs Collection</Text>
       </Pressable>
       <Pressable style={ styles.button } onPress={() => navigation.navigate("Main", {
-        pageTitle: 'Digital Collection',
         qFormat: 'digital',
         qStatus: 'owned'
       })}>
         <Text style={ styles.buttonText }>Digital Lossless Collection</Text>
       </Pressable>
       <Pressable style={ styles.button } onPress={() => navigation.navigate("Main", {
-        pageTitle: 'Vinyls Wishlist',
-        qFormat: 'vinyl',
+        qFormat: '',
         qStatus: 'wishlist'
       })}>
-        <Text style={ styles.buttonText }>vinilos que deseo</Text>
+        <Text style={ styles.buttonText }>My Wishlist</Text>
       </Pressable>
     </View>
   )
