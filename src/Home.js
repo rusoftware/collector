@@ -2,7 +2,7 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 
 const Home = ( {navigation} ) => {
   return (
-    <View style={styles.contenedor}>
+    <View style={styles.container}>
       <Pressable style={ styles.button } onPress={() => navigation.navigate("Main")}>
         <Text style={ styles.buttonText }>My Collection</Text>
       </Pressable>
@@ -35,8 +35,9 @@ const Home = ( {navigation} ) => {
 }
 
 const styles = StyleSheet.create({
-  contenedor: {
-    flex: 1
+  container: {
+    flex: 1,
+    //paddingTop: 40
   },
   button: {
     alignItems: 'center',

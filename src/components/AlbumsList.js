@@ -6,7 +6,7 @@ import Label from './Label';
 import { useNavigation } from '@react-navigation/native';
 
 const AlbumsList = ({
-  albums, format, status
+  albums, status
 }) => {
 
   const navigation = useNavigation();
