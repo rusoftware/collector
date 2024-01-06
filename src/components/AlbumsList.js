@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
-import Album from './Album';
+import { Colors } from '../assets/theme';
+import AlbumListItem from './AlbumListItem';
 import Label from './Label';
 
 import { useNavigation } from '@react-navigation/native';
@@ -62,7 +63,7 @@ const AlbumsList = ({
             data={item.albums}
             keyExtractor={(album, index) => `${album.title}-${index}`}
             renderItem={({ item: album }) => (
-              <Album album={album}></Album>
+              <AlbumListItem album={album} />
             )} />
         </View>
       )} />
@@ -73,7 +74,7 @@ const AlbumsList = ({
 
 const styles = StyleSheet.create({
   bottomNavigation: {
-    backgroundColor: '#171718',
+    backgroundColor: Colors.blackCarbon,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 4,
@@ -84,14 +85,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 4,
     borderRightWidth: 1,
-    borderColor: '#9fa3a9'
+    borderColor: Colors.ashGrey,
   },
   noBorder: {
     borderRightWidth: 0
   },
   formatButtonText: {
     textAlign: 'center',
-    color: '#9fa3a9',
+    color: Colors.ashGrey,
     fontWeight: 'bold',
     fontSize: 16
   }

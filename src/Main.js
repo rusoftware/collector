@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Colors } from './assets/theme';
 import AlbumsList from './components/AlbumsList';
 
 const Main = ({ route }) => {
@@ -181,7 +182,7 @@ const Main = ({ route }) => {
 
 const styles = StyleSheet.create({
   appMain: {
-    backgroundColor: '#1f2124',
+    backgroundColor: Colors.blackCarbon,
     flex: 1,
     padding: 0
   },

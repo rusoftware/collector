@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Keyboard, Text, Pressable } from "react-native";
+import { Colors } from "./assets/theme";
 import { Feather, Entypo } from "@expo/vector-icons";
 import ApiResponseList from "./components/ApiResponseList";
 
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: "100%",
-    backgroundColor: '#393d42',
+    backgroundColor: Colors.steelGrey,
   },
   searchBar__unclicked: {
     padding: 10,
@@ -158,18 +159,18 @@ const styles = StyleSheet.create({
   cancelBtn: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#2196f3'
+    color: Colors.lightBlue
   },
   switchSearchModeContainer: {
     padding: 15,
     paddingTop: 0,
     alignItems: "flex-end",
-    backgroundColor: '#393d42'
+    backgroundColor: Colors.steelGrey,
   },
   swithSearchMode: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#2196f3', 
+    color: Colors.lightBlue, 
   }
 });
 

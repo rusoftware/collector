@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from "react-native";
+import { Colors } from '../assets/theme';
 
-const Album = ({
+const AlbumListItem = ({
   album
 }) => {
 
@@ -25,10 +26,10 @@ const styles = StyleSheet.create({
   albumContainer: {
     flexDirection: "row",
     elevation: 4,
-    backgroundColor: '#1f2124',
+    backgroundColor: Colors.darkGrey,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#000',
+    borderColor: Colors.blackMamba,
     padding: 16
   },
   albumCover: {
@@ -44,11 +45,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    color: '#fff'
+    color: Colors.pureWhite,
   },
   artist: {
     fontSize: 14,
-    color: '#fff'
+    color: Colors.pureWhite,
   },
   ownedFormatsContainer: {
     flexDirection: 'row',
@@ -57,8 +58,8 @@ const styles = StyleSheet.create({
   ownedFormat: {
     fontSize: 12,
     marginRight: 8,
-    color: '#999',
+    color: Colors.slateGrey,
   },
 })
 
-export default Album;
+export default AlbumListItem;
