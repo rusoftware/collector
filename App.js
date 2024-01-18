@@ -11,6 +11,7 @@ import SearchBar from './src/SearchBar';
 import ItemDetails from './src/components/ItemDetails';
 import { Colors } from "./src/assets/theme";
 import db, { initializeDatabase } from './src/utils/db';
+import AddManually from './src/components/AddManually';
 
 const Stack = createStackNavigator();
 
@@ -29,9 +30,12 @@ const App = () => {
         case 'vinyl':
           formatValue = 'Vinyls'
           break;
-        case 'cd':
-          formatValue = 'CDs'
+        case 'cassette':
+          formatValue = 'Cassettes'
           break;
+        case 'cd':
+            formatValue = 'CDs'
+            break;
         case 'digital':
           formatValue = 'Digital Lossless'
           break;
@@ -131,6 +135,12 @@ const App = () => {
             <Stack.Screen
               name="Settings"
               component={ Settings }
+              //options={() => ({headerShown: false})}
+            />
+
+            <Stack.Screen
+              name="AddManually"
+              component={ AddManually }
               //options={() => ({headerShown: false})}
             />
           </Stack.Group>

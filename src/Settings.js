@@ -1,6 +1,6 @@
 import { Text, View, Switch, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { Colors } from "./assets/theme";
+import { Colors, i18n } from "./assets/theme";
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import db from './utils/db'
 
@@ -33,7 +33,7 @@ const Settings = () => {
       const currentValue = updatedSettingsData[0][format];
       const newValue = currentValue === 0 ? 1 : 0;
       
-      const valuesForDb = [
+      const valuesToStore = [
         1, // id
         format === 'vinyl' ? newValue : updatedSettingsData[0].vinyl,
         format === 'cassette' ? newValue : updatedSettingsData[0].cassette,
@@ -41,7 +41,7 @@ const Settings = () => {
         format === 'digital' ? newValue : updatedSettingsData[0].digital,
       ];
       
-      updateDbField(valuesForDb).then(() => fetchSettings())
+      updateDbField(valuesToStore).then(() => fetchSettings())
       updatedSettingsData[0][format] = newValue;
       return updatedSettingsData;
     })
@@ -70,16 +70,26 @@ const Settings = () => {
     } 
   };
 
-  const renderSwitch = (format) => {
+  // renders
+  const renderSwitchSetting = (format, icon) => {
     return (
-      <Switch
-        trackColor={{false: Colors.ashGrey, true: Colors.lightBlue}}
-        thumbColor={ settingsData[0][format] === 1 ? Colors.pureWhite : Colors.lightGrey }
-        ios_backgroundColor={ Colors.ashGrey }
-        onValueChange={() => toggleSettingSwitch(format)}
-        value={ settingsData[0][format] === 1 }
-      />
-    )
+      <View style={ styles.settingsRow }>
+        <View style={ styles.settingDescription }>
+          <View style={ styles.settingIcon }>
+            { icon }
+          </View>
+          <Text style={ styles.settingTitle }>{ i18n[`${format}Title`] }</Text>
+        </View>
+
+        <Switch
+          trackColor={{false: Colors.ashGrey, true: Colors.lightBlue}}
+          thumbColor={ settingsData[0][format] === 1 ? Colors.pureWhite : Colors.lightGrey }
+          ios_backgroundColor={ Colors.ashGrey }
+          onValueChange={() => toggleSettingSwitch(format)}
+          value={ settingsData[0][format] === 1 }
+        />
+      </View>
+    );
   }
 
   const renderSettingsPage = () => {
@@ -90,45 +100,12 @@ const Settings = () => {
     return (
       <View style={ styles.settingsContainer }>
         <Text style={ styles.settingsHeader }>I want to collect</Text>
-        <View style={ styles.settingsRow }>
-          <View style={ styles.settingDescription }>
-            <View style={ styles.settingIcon }>
-              <MaterialCommunityIcons name="record-player" size={30} color="black" />
-            </View>
-            <Text style={ styles.settingTitle }>Vinyl Records</Text>
-          </View>
-          { renderSwitch('vinyl') }
-        </View>
         
-        <View style={ styles.settingsRow }>
-          <View style={ styles.settingDescription }>
-            <View style={ styles.settingIcon }>
-              <FontAwesome5 name="compact-disc" size={28} color="black" />
-            </View>
-            <Text style={ styles.settingTitle }>Compact Disc (CD)</Text>
-          </View>
-          { renderSwitch('cd') }
-        </View>
+        { renderSwitchSetting('vinyl', <MaterialCommunityIcons name="record-player" size={30} color="black" />) }
+        { renderSwitchSetting('cassette', <MaterialCommunityIcons name="cassette" size={30} color="black" />) }
+        { renderSwitchSetting('cd', <FontAwesome5 name="compact-disc" size={28} color="black" />) }
+        { renderSwitchSetting('digital', <MaterialCommunityIcons name="laptop" size={30} color="black" />) }
         
-        <View style={ styles.settingsRow }>
-          <View style={ styles.settingDescription }>
-            <View style={ styles.settingIcon }>
-              <MaterialCommunityIcons name="cassette" size={30} color="black" />
-            </View>
-            <Text style={ styles.settingTitle }>Cassettes</Text>
-          </View>
-          { renderSwitch('cassette') }
-        </View>
-
-        <View style={ styles.settingsRow }>
-          <View style={ styles.settingDescription }>
-            <View style={ styles.settingIcon }>
-              <MaterialCommunityIcons name="laptop" size={30} color="black" />
-            </View>
-            <Text style={ styles.settingTitle }>Digital Music (lossless)</Text>
-          </View>
-          { renderSwitch('digital') }
-        </View>
       </View>
     )
   }

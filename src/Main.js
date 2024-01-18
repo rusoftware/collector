@@ -48,7 +48,8 @@ const Main = ({ route }) => {
       cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-hTU0jAjxqs_p2qRkEOEeueesr2UWDv6Gff_UgAUHJjj0JNce-LR8X_hzePe05jnY1H0&usqp=CAU',
       formats: {
         vinyl: 'owned',
-        cd: 'wishlist'
+        cd: 'wishlist',
+        cassette: 'owned'
       }
     },
     {

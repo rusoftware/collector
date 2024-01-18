@@ -10,3 +10,10 @@ export const Colors = {
   slateGrey: '#999999',
   lightGrey: '#cccccc'
 }
+
+export const i18n = {
+  vinylTitle: 'Vinyl Records',
+  cdTitle: 'Compact Discs',
+  cassetteTitle: 'Cassettes',
+  digitalTitle: 'Digital Music (lossless)'
+}
