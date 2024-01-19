@@ -9,7 +9,7 @@ import Home from './src/Home';
 import Main from './src/Main';
 import SearchBar from './src/SearchBar';
 import ItemDetails from './src/components/ItemDetails';
-import { Colors } from "./src/assets/theme";
+import { Colors, i18n } from "./src/assets/theme";
 import db, { initializeDatabase } from './src/utils/db';
 import AddManually from './src/components/AddManually';
 
@@ -26,22 +26,8 @@ const App = () => {
 
   const renderPageTitle = (format = '', status = 'owned') => {
     if (format) {
-      switch (format) {
-        case 'vinyl':
-          formatValue = 'Vinyls'
-          break;
-        case 'cassette':
-          formatValue = 'Cassettes'
-          break;
-        case 'cd':
-            formatValue = 'CDs'
-            break;
-        case 'digital':
-          formatValue = 'Digital Lossless'
-          break;
-      }
-
-      return `${formatValue} ${(status === 'owned') ? 'Collection' : 'Wishlist'}`
+      const titleKeyName = `${format}Title`;
+      return `${i18n[titleKeyName]} ${(status === 'owned') ? 'Collection' : 'Wishlist'}`
     }
     else {
       return `${(status === 'owned') ? 'My Collection' : 'My Wishlist'}`

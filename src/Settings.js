@@ -1,7 +1,6 @@
 import { Text, View, Switch, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { Colors, i18n } from "./assets/theme";
-import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Colors, i18n, themeIcons } from "./assets/theme";
 import db from './utils/db'
 
 const Settings = () => {
@@ -101,10 +100,10 @@ const Settings = () => {
       <View style={ styles.settingsContainer }>
         <Text style={ styles.settingsHeader }>I want to collect</Text>
         
-        { renderSwitchSetting('vinyl', <MaterialCommunityIcons name="record-player" size={30} color="black" />) }
-        { renderSwitchSetting('cassette', <MaterialCommunityIcons name="cassette" size={30} color="black" />) }
-        { renderSwitchSetting('cd', <FontAwesome5 name="compact-disc" size={28} color="black" />) }
-        { renderSwitchSetting('digital', <MaterialCommunityIcons name="laptop" size={30} color="black" />) }
+        { renderSwitchSetting('vinyl', themeIcons.vinylIcon()) }
+        { renderSwitchSetting('cassette', themeIcons.cassetteIcon()) }
+        { renderSwitchSetting('cd', themeIcons.cdIcon()) }
+        { renderSwitchSetting('digital', themeIcons.digitalIcon()) }
         
       </View>
     )

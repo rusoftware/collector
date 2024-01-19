@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useState, useCallback } from "react";
 import { useFocusEffect } from '@react-navigation/native';
-import { i18n } from "./assets/theme";
+import { Colors, i18n, themeIcons } from "./assets/theme";
 import db from './utils/db'
 
 const Home = ( {navigation} ) => {
@@ -27,11 +27,13 @@ const Home = ( {navigation} ) => {
   const renderCollectionButton = (format) => {
     if (settings && settings[0][format] === 1) {
       const titleKeyName = `${format}Title`;
+      const iconKeyName = `${format}Icon`;
       return (
-        <Pressable style={ styles.button } onPress={() => navigation.navigate("Main", {
+        <Pressable style={ styles.collectionButton } onPress={() => navigation.navigate("Main", {
           qFormat: format,
           qStatus: 'owned'
         })}>
+          <View style={ styles.buttonIcon }>{ themeIcons[iconKeyName](40, Colors.lightBlue) }</View>
           <Text style={ styles.buttonText }>{ i18n[titleKeyName] }</Text>
         </Pressable>
       )
@@ -52,30 +54,40 @@ const Home = ( {navigation} ) => {
 
   const homePage = () => {
     return (
-      <View style={styles.container}>
-        <Pressable style={ styles.button } onPress={() => navigation.navigate("Main")}>
-          <Text style={ styles.buttonText }>My Collection</Text>
-        </Pressable>
-        
-        { renderCollectionButton('vinyl') }
-        { renderCollectionButton('cassette') }
-        { renderCollectionButton('cd') }
-        { renderCollectionButton('digital') }
+      <>
+        <View style={styles.container}>
+          <View style={ styles.collectionBtnsContainer }>
+            { renderCollectionButton('vinyl') }
+            { renderCollectionButton('cassette') }
+            { renderCollectionButton('cd') }
+            { renderCollectionButton('digital') }
+          </View>
 
-        <Pressable style={ styles.button } onPress={() => navigation.navigate("Main", {
-          qFormat: '',
-          qStatus: 'wishlist'
-        })}>
-          <Text style={ styles.buttonText }>My Wishlist</Text>
-        </Pressable>
+          {separator("TOOLS")}
 
-        {separator("TOOLS")}
+          <Pressable onPress={() => navigation.navigate('AddManually')} style={ styles.button }>
+            <Text style={ styles.buttonText }>Add Manually</Text>
+          </Pressable>
+        </View>
 
-        <Pressable onPress={() => navigation.navigate('AddManually')} style={ styles.button }>
-          <Text style={ styles.buttonText }>Add Manually</Text>
-        </Pressable>
+        <View style={styles.bottomNavigation}>
+          <Pressable
+            style={ styles.formatButton }
+            onPress={() => navigation.navigate("Main")}>
+            <Text style={ styles.formatButtonText }>My Collection</Text>
+          </Pressable>
 
-      </View>
+          <Pressable
+            style={styles.formatButton}
+            onPress={() => navigation.navigate('Main', {
+              qFormat: '',
+              qStatus: 'wishlist'
+            })}
+            >
+              <Text style={styles.formatButtonText}>My Wishlist</Text>
+          </Pressable>
+        </View>
+      </>
     )
   }
   
@@ -84,8 +96,8 @@ const Home = ( {navigation} ) => {
       if (settings[0].vinyl === 0 && settings[0].cd === 0 && settings[0].digital === 0 && settings[0].cassette === 0) {
         return (
           <View style={styles.error}>
-            <Pressable onPress={() => navigation.navigate("Settings")} style={styles.btn}>
-              <Text>GO TO SETTINGS</Text>
+            <Pressable onPress={() => navigation.navigate("Settings")} style={styles.button}>
+              <Text style={ styles.buttonText }>GO TO SETTINGS</Text>
             </Pressable>
           </View>
         )
@@ -114,7 +126,9 @@ const Home = ( {navigation} ) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: 40
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.steelGrey
   },
   error: {
     flex: 1,
@@ -128,8 +142,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'black',
+    backgroundColor: Colors.blackMamba,
     margin: 14
+  },
+  collectionBtnsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  collectionButton: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: Colors.blackCarbon,
+    marginVertical: 14,
+    marginHorizontal: '5%',
+    width: '40%',
+    height: '40%'
   },
   buttonText: {
     fontSize: 16,
@@ -138,21 +171,32 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white'
   },
-
-  input: {
-    padding: 18,
-    fontSize: 24,
-    textAlign: "center",
+  buttonIcon: {
+    //backgroundColor: 'red'
   },
-  btn: {
-    textAlign: "center",
-    fontSize: 14,
-    alignContent: 'center',
-    alignItems: 'center',
-    padding: 6,
-    marginHorizontal: 40,
-    marginVertical: 6,
-    backgroundColor: 'lightblue'
+
+  bottomNavigation: {
+    backgroundColor: Colors.blackCarbon,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 4,
+    paddingHorizontal: 0
+  },
+  formatButton: {
+    paddingVertical: 12,
+    flex: 1,
+    marginHorizontal: 4,
+    borderRightWidth: 1,
+    borderColor: Colors.ashGrey,
+  },
+  noBorder: {
+    borderRightWidth: 0
+  },
+  formatButtonText: {
+    textAlign: 'center',
+    color: Colors.ashGrey,
+    fontWeight: 'bold',
+    fontSize: 16
   }
 })
 
